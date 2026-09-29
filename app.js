@@ -18,16 +18,91 @@ const logoutButton = document.getElementById("logoutButton");
 
 const authMessage = document.getElementById("authMessage");
 
+const vehicleLogForm = document.getElementById("vehicleLogForm");
+const titleInput = document.getElementById("title");
+const categoryInput = document.getElementById("category");
+const recordDateInput = document.getElementById("date");
+const notesInput = document.getElementById("notes");
+const recordsContainer = document.getElementById("recordsContainer");
+
 
 function showApp() {
     authSection.classList.add("hidden");
     appSection.classList.remove("hidden");
+
+    loadRecords();
 }
 
 
 function showAuth() {
     appSection.classList.add("hidden");
     authSection.classList.remove("hidden");
+}
+
+async function loadRecords() {
+
+    const { data, error } = await supabaseClient
+        .from("vehicle_logs")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error("Error loading records:", error);
+        recordsContainer.innerHTML =
+            "<p>Unable to load vehicle records.</p>";
+        return;
+    }
+
+    recordsContainer.innerHTML = "";
+
+    if (data.length === 0) {
+        recordsContainer.innerHTML =
+            "<p>No vehicle records yet.</p>";
+        return;
+    }
+
+    data.forEach((record) => {
+
+        const card = document.createElement("div");
+        card.className = "record-card";
+
+        const formattedDate =
+            new Date(record.record_date + "T00:00:00")
+                .toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                });
+
+        card.innerHTML = `
+            <div class="record-header">
+                <div>
+                    <h3>${record.title}</h3>
+                    <span class="category">
+                        ${record.category}
+                    </span>
+                </div>
+
+                <span class="record-date">
+                    ${formattedDate}
+                </span>
+            </div>
+
+            <p>${record.notes || "No notes provided."}</p>
+
+            <div class="record-actions">
+                <button class="edit-button">
+                    Edit
+                </button>
+
+                <button class="delete-button">
+                    Delete
+                </button>
+            </div>
+        `;
+
+        recordsContainer.appendChild(card);
+    });
 }
 
 
@@ -114,6 +189,41 @@ logoutButton.addEventListener("click", async () => {
     showAuth();
 });
 
+vehicleLogForm.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    const title = titleInput.value.trim();
+    const category = categoryInput.value;
+    const recordDate = recordDateInput.value;
+    const notes = notesInput.value.trim();
+
+    if (!title || !category || !recordDate) {
+        alert("Please complete the title, category, and date.");
+        return;
+    }
+
+    const { error } = await supabaseClient
+        .from("vehicle_logs")
+        .insert([
+            {
+                title: title,
+                category: category,
+                record_date: recordDate,
+                notes: notes
+            }
+        ]);
+
+    if (error) {
+        console.error("Error adding record:", error);
+        alert("Unable to add the vehicle record.");
+        return;
+    }
+
+    vehicleLogForm.reset();
+
+    await loadRecords();
+});
 
 async function checkSession() {
 
