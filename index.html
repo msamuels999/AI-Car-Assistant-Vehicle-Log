@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Car Assistant - Vehicle Log</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>AI Car Assistant</h1>
+                <p>Vehicle Maintenance & Issue Log</p>
+            </div>
+
+            <button id="logoutButton" class="logout-button">Logout</button>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="welcome-section">
+            <h2>Vehicle Dashboard</h2>
+            <p>
+                Keep track of maintenance, repairs, and vehicle issues
+                in one convenient place.
+            </p>
+        </section>
+
+        <section class="form-section">
+
+            <h2>Add Vehicle Record</h2>
+
+            <form id="vehicleLogForm">
+
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="Example: Oil Change"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+
+                    <select id="category" required>
+                        <option value="">Select a category</option>
+                        <option value="Maintenance">Maintenance</option>
+                        <option value="Repair">Repair</option>
+                        <option value="Vehicle Issue">Vehicle Issue</option>
+                        <option value="Inspection">Inspection</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+
+                    <textarea
+                        id="notes"
+                        rows="4"
+                        placeholder="Enter details about the vehicle record..."
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="primary-button">
+                    Add Record
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <section class="records-section">
+
+            <h2>Vehicle Records</h2>
+
+            <div id="recordsContainer">
+
+                <div class="record-card">
+
+                    <div class="record-header">
+                        <div>
+                            <h3>Oil Change</h3>
+                            <span class="category">Maintenance</span>
+                        </div>
+
+                        <span class="record-date">
+                            September 28, 2026
+                        </span>
+                    </div>
+
+                    <p>
+                        Changed engine oil and filter.
+                    </p>
+
+                    <div class="record-actions">
+                        <button class="edit-button">Edit</button>
+                        <button class="delete-button">Delete</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>AI Car Assistant - Engineering Design 2</p>
+    </footer>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
