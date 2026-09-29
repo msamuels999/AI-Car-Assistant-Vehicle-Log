@@ -189,8 +189,67 @@ textarea {
 
 footer {
     text-align: center;
-
     padding: 25px;
-
     color: #666;
+}
+
+/* Authentication screen */
+
+.auth-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f6f8;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 450px;
+    background-color: white;
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+}
+
+.auth-card h1 {
+    color: #182433;
+    margin-bottom: 5px;
+}
+
+.auth-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.auth-card h2 {
+    margin-bottom: 20px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.secondary-button {
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 11px 18px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.secondary-button:hover {
+    background-color: #3f3f3f;
+}
+
+#authMessage {
+    margin-top: 15px;
+}
+
+.hidden {
+    display: none !important;
 }

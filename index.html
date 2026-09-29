@@ -9,6 +9,49 @@
 </head>
 
 <body>
+<section id="authSection" class="auth-section">
+
+    <div class="auth-card">
+
+        <h1>AI Car Assistant</h1>
+        <p class="auth-subtitle">Vehicle Maintenance & Issue Log</p>
+
+        <h2>Account Access</h2>
+
+        <div class="form-group">
+            <label for="authEmail">Email</label>
+            <input
+                type="email"
+                id="authEmail"
+                placeholder="Enter your email"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="authPassword">Password</label>
+            <input
+                type="password"
+                id="authPassword"
+                placeholder="Enter your password"
+            >
+        </div>
+
+        <div class="auth-buttons">
+            <button id="loginButton" class="primary-button">
+                Log In
+            </button>
+
+            <button id="registerButton" class="secondary-button">
+                Register
+            </button>
+        </div>
+
+        <p id="authMessage"></p>
+
+    </div>
+
+</section>
+<div id="appSection" class="hidden">
 
     <header>
         <div class="header-content">
@@ -123,7 +166,8 @@
     <footer>
         <p>AI Car Assistant - Engineering Design 2</p>
     </footer>
-
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="app.js"></script>
 
 </body>
