@@ -102,9 +102,100 @@ async function loadRecords() {
         `;
 
         recordsContainer.appendChild(card);
+        const editButton = card.querySelector(".edit-button");
+        const deleteButton = card.querySelector(".delete-button");
+
+        editButton.addEventListener("click", () => {
+            editRecord(record);
+});
+
+        deleteButton.addEventListener("click", () => {
+            deleteRecord(record.id);
+});
     });
 }
 
+async function editRecord(record) {
+
+    const newTitle = prompt(
+        "Edit title:",
+        record.title
+    );
+
+    if (newTitle === null) {
+        return;
+    }
+
+    const newCategory = prompt(
+        "Edit category:",
+        record.category
+    );
+
+    if (newCategory === null) {
+        return;
+    }
+
+    const newDate = prompt(
+        "Edit date (YYYY-MM-DD):",
+        record.record_date
+    );
+
+    if (newDate === null) {
+        return;
+    }
+
+    const newNotes = prompt(
+        "Edit notes:",
+        record.notes || ""
+    );
+
+    if (newNotes === null) {
+        return;
+    }
+
+    const { error } = await supabaseClient
+        .from("vehicle_logs")
+        .update({
+            title: newTitle.trim(),
+            category: newCategory.trim(),
+            record_date: newDate,
+            notes: newNotes.trim()
+        })
+        .eq("id", record.id);
+
+    if (error) {
+        console.error("Error updating record:", error);
+        alert("Unable to update the record.");
+        return;
+    }
+
+    await loadRecords();
+}
+
+
+async function deleteRecord(recordId) {
+
+    const confirmed = confirm(
+        "Are you sure you want to delete this vehicle record?"
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    const { error } = await supabaseClient
+        .from("vehicle_logs")
+        .delete()
+        .eq("id", recordId);
+
+    if (error) {
+        console.error("Error deleting record:", error);
+        alert("Unable to delete the record.");
+        return;
+    }
+
+    await loadRecords();
+}
 
 registerButton.addEventListener("click", async () => {
 
