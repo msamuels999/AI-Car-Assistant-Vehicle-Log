@@ -10,6 +10,8 @@ This application was developed for Engineering Design 2 using AI-assisted softwa
 
 ## Live Application
 
+Link to Youtube Vid Demo: https://youtu.be/D1eixQjYrcY
+
 Link to deployed Application: https://aquamarine-malasada-bf7eca.netlify.app/
 
 ## Features
